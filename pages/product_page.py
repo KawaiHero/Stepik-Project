@@ -14,7 +14,6 @@ class ProductPage(BasePage):
         product_button = self.browser.find_element(*ProductPageLocators.PRODUCT_BUTTON)
         product_button.click()
         solve_quiz_and_get_code(self)
-        time.sleep(2)
 
     def should_be_same_price(self):
         bucket_price = self.browser.find_element(*ProductPageLocators.BUCKET_PRICE).text
