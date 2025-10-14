@@ -14,6 +14,7 @@ class ProductPage(BasePage):
         product_button = self.browser.find_element(*ProductPageLocators.PRODUCT_BUTTON)
         product_button.click()
         solve_quiz_and_get_code(self)
+        #time.sleep(30)
 
     def should_be_same_price(self):
         bucket_price = self.browser.find_element(*ProductPageLocators.BUCKET_PRICE).text
@@ -26,3 +27,11 @@ class ProductPage(BasePage):
         product_name_in_bucket = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_BUCKET).text
         product_name_on_page = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
         assert product_name_in_bucket == product_name_on_page, "The product name is incorrect"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def element_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+
