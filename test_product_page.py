@@ -18,7 +18,7 @@ class TestUserAddToBaskerFromProductPage:
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
         page = ProductPage(browser, link)
         page.open()
-        page.add_product_to_cart()
+        page.add_product_to_cart_without_quiz()
         page.should_be_same_pruduct_name()
         page.should_be_same_price()
 
