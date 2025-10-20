@@ -4,6 +4,30 @@ from pages.login_page import LoginPage
 from pages.basket_page import BasketPage
 import time
 
+@pytest.fixture
+def new_user(browser):
+    link = 'https://selenium1py.pythonanywhere.com/en-gb/accounts/login'
+    page = LoginPage(browser, link)
+    page.open()
+    page.register_new_user(email="<EMAIL>", password="<PASSWORD>")
+    page.should_be_authorized_user()
+
+@pytest.mark.usefixtures("new_user")
+class TestUserAddToBaskerFromProductPage:
+    def test_user_can_add_product_to_basket(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_product_to_cart()
+        page.should_be_same_pruduct_name()
+        page.should_be_same_price()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
 @pytest.mark.parametrize('num', ["0","1","2","3","4","5","6",
                                  pytest.param(7, marks=pytest.mark.xfail(reason="bugged")),
                                  "8","9"])

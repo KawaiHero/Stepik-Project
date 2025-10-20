@@ -13,7 +13,7 @@ class ProductPage(BasePage):
     def add_product_to_cart(self):
         product_button = self.browser.find_element(*ProductPageLocators.PRODUCT_BUTTON)
         product_button.click()
-        solve_quiz_and_get_code(self)
+        #solve_quiz_and_get_code(self)
         #time.sleep(30)
 
     def should_be_same_price(self):
