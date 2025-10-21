@@ -5,7 +5,7 @@ from pages.basket_page import BasketPage
 import time
 
 @pytest.fixture
-def new_user(browser):
+def setup(browser):
     link = 'https://selenium1py.pythonanywhere.com/en-gb/accounts/login'
     page = LoginPage(browser, link)
     page.open()
