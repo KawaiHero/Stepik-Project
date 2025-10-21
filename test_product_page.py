@@ -6,13 +6,15 @@ import time
 
 @pytest.fixture
 def setup(browser):
+    email = str(time.time()) + "@fakemail.org"
+    password = 'PASS' + str(time.time())
     link = 'https://selenium1py.pythonanywhere.com/en-gb/accounts/login'
     page = LoginPage(browser, link)
     page.open()
-    page.register_new_user(email="<EMAIL>", password="<PASSWORD>")
+    page.register_new_user(email, password)
     page.should_be_authorized_user()
 
-@pytest.mark.usefixtures("new_user")
+@pytest.mark.usefixtures("setup")
 class TestUserAddToBaskerFromProductPage:
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
